@@ -1,6 +1,6 @@
 package tddmicroexercises.telemetrysystem;
 
-public class MockTelemetryClient implements TelemetryClientInterface {
+public class MockTelemetryClient implements TelemetryClientInterface ,TelemetryNetworkInterface{
     private boolean isOnline;
     private String diagnosticInfo;
     private boolean isSendCalled;
