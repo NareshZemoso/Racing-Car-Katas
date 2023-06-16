@@ -4,12 +4,17 @@ public class TelemetryDiagnosticControls
 {
     private final String DiagnosticChannelConnectionString = "*111#";
     
-    private final TelemetryClient telemetryClient;
+    private TelemetryClientInterface telemetryClient;
+
+    public void setTelemetryClient(TelemetryClientInterface telemetryClient) {
+        this.telemetryClient = telemetryClient;
+    }
+
     private String diagnosticInfo = "";
 
         public TelemetryDiagnosticControls()
         {
-            telemetryClient = new TelemetryClient();
+            //telemetryClient = new TelemetryClient();
         }
         
         public String getDiagnosticInfo(){
