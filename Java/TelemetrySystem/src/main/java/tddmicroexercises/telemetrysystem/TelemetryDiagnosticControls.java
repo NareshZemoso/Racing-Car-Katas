@@ -4,12 +4,18 @@ public class TelemetryDiagnosticControls
 {
     private final String DiagnosticChannelConnectionString = "*111#";
     
-    private final TelemetryClient telemetryClient;
+    private TelemetryClientInterface telemetryClient;
+    private TelemetryNetworkInterface telemetryNetworkInterface;
+
+    public void setTelemetryClient(TelemetryClientInterface telemetryClient) {
+        this.telemetryClient = telemetryClient;
+    }
+
     private String diagnosticInfo = "";
 
         public TelemetryDiagnosticControls()
         {
-            telemetryClient = new TelemetryClient();
+            //telemetryClient = new TelemetryClient();
         }
         
         public String getDiagnosticInfo(){
@@ -24,16 +30,16 @@ public class TelemetryDiagnosticControls
         {
             diagnosticInfo = "";
 
-            telemetryClient.disconnect();
+            telemetryNetworkInterface.disconnect();
     
             int retryLeft = 3;
-            while (telemetryClient.getOnlineStatus() == false && retryLeft > 0)
+            while (telemetryNetworkInterface.getOnlineStatus() == false && retryLeft > 0)
             {
-                telemetryClient.connect(DiagnosticChannelConnectionString);
+                telemetryNetworkInterface.connect(DiagnosticChannelConnectionString);
                 retryLeft -= 1;
             }
              
-            if(telemetryClient.getOnlineStatus() == false)
+            if(telemetryNetworkInterface.getOnlineStatus() == false)
             {
                 throw new Exception("Unable to connect.");
             }
